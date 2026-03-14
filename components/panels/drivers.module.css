@@ -1,0 +1,602 @@
+/* ================= WRAPPER ================= */
+
+.wrap{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  width:100%;
+}
+
+/* ================= CARD ================= */
+
+.card{
+  background:#ffffff;
+  border-radius:24px;
+  padding:22px;
+  box-shadow:0 14px 38px rgba(15,23,42,.06);
+  border:1px solid rgba(15,23,42,.06);
+}
+
+/* ================= HEADER ================= */
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.title{
+  font-size:24px;
+  font-weight:800;
+  color:#0f172a;
+  margin:0;
+  letter-spacing:-.02em;
+}
+
+.sub{
+  margin:6px 0 0;
+  font-size:13px;
+  font-weight:500;
+  color:#64748b;
+}
+
+.titleWrap{
+  min-width:0;
+}
+
+.tools{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:#e8f0ff;
+  color:#2563eb;
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+/* ================= INPUT ================= */
+
+.input{
+  border:1px solid rgba(15,23,42,.12);
+  border-radius:14px;
+  padding:10px 12px;
+  font-size:14px;
+  outline:none;
+  transition:all .2s ease;
+  width:100%;
+  background:#fff;
+  height:44px;
+  color:#0f172a;
+}
+
+.input::placeholder{
+  color:#94a3b8;
+}
+
+.input:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 4px rgba(37,99,235,.08);
+}
+
+.search{
+  width:min(320px, 100%);
+}
+
+/* ================= FORM ================= */
+
+.form{
+  margin-top:14px;
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:12px;
+  align-items:start;
+}
+
+/* ================= CUSTOM ROLE SELECT ================= */
+
+.roleWrap{
+  position:relative;
+  width:100%;
+}
+
+.roleButton{
+  width:100%;
+  height:44px;
+  border:1px solid rgba(15,23,42,.12);
+  border-radius:14px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:0 14px;
+  cursor:pointer;
+  transition:all .2s ease;
+  color:#0f172a;
+}
+
+.roleButton:hover{
+  border-color:rgba(37,99,235,.35);
+  background:#f8fbff;
+}
+
+.roleButtonOpen{
+  border-color:#2563eb;
+  box-shadow:0 0 0 4px rgba(37,99,235,.08);
+}
+
+.roleButtonLeft{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+
+.roleDot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  flex:0 0 auto;
+}
+
+.roleDotDriver{
+  background:#22c55e;
+  box-shadow:0 0 0 4px rgba(34,197,94,.12);
+}
+
+.roleDotAdmin{
+  background:#2563eb;
+  box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+.roleText{
+  font-size:14px;
+  font-weight:600;
+  color:#0f172a;
+}
+
+.chevron{
+  font-size:14px;
+  color:#64748b;
+  transition:transform .2s ease;
+  flex:0 0 auto;
+}
+
+.chevronOpen{
+  transform:rotate(180deg);
+}
+
+.roleMenu{
+  position:absolute;
+  top:calc(100% + 8px);
+  left:0;
+  width:100%;
+  background:#fff;
+  border:1px solid rgba(15,23,42,.10);
+  border-radius:16px;
+  box-shadow:0 18px 38px rgba(15,23,42,.12);
+  overflow:hidden;
+  z-index:80;
+  padding:8px;
+  animation:dropIn .18s ease;
+}
+
+@keyframes dropIn{
+  from{
+    opacity:0;
+    transform:translateY(-6px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.roleOption{
+  width:100%;
+  border:none;
+  background:transparent;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 12px;
+  border-radius:12px;
+  cursor:pointer;
+  transition:all .18s ease;
+  text-align:left;
+}
+
+.roleOption:hover{
+  background:#f8fafc;
+}
+
+.roleOptionActive{
+  background:#eff6ff;
+}
+
+.roleOptionMain{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.roleOptionLabel{
+  font-size:14px;
+  font-weight:700;
+  color:#0f172a;
+}
+
+.roleOptionDesc{
+  font-size:12px;
+  color:#64748b;
+}
+
+.roleCheck{
+  font-size:13px;
+  font-weight:800;
+  color:#2563eb;
+}
+
+/* ================= BUTTONS ================= */
+
+.btn{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:white;
+  border:none;
+  border-radius:14px;
+  padding:10px 16px;
+  cursor:pointer;
+  font-weight:700;
+  transition:.2s;
+  height:44px;
+  box-shadow:0 10px 20px rgba(37,99,235,.18);
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+  box-shadow:0 14px 24px rgba(37,99,235,.22);
+}
+
+.btnGhost{
+  background:#fff;
+  border:1px solid rgba(15,23,42,.12);
+  border-radius:12px;
+  padding:8px 14px;
+  cursor:pointer;
+  transition:.2s;
+  height:38px;
+  font-weight:600;
+  color:#0f172a;
+}
+
+.btnGhost:hover{
+  background:#f8fafc;
+  border-color:rgba(15,23,42,.18);
+}
+
+.btnDanger{
+  background:#ef4444;
+  border:none;
+  color:white;
+  border-radius:12px;
+  padding:8px 14px;
+  cursor:pointer;
+  height:38px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.btnDanger:hover{
+  background:#dc2626;
+}
+
+/* ================= ALERT ================= */
+
+.alert{
+  margin-top:12px;
+  background:#fef2f2;
+  color:#991b1b;
+  padding:12px 14px;
+  border-radius:14px;
+  font-size:14px;
+  border:1px solid #fecaca;
+}
+
+/* ================= TABLE TOOLBAR ================= */
+
+.tableToolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:14px;
+  flex-wrap:wrap;
+}
+
+.tableMeta{
+  font-size:13px;
+  font-weight:600;
+  color:#64748b;
+}
+
+/* ================= TABLE ================= */
+
+.tableWrap{
+  overflow-x:auto;
+  border-radius:18px;
+  border:1px solid rgba(15,23,42,.08);
+}
+
+.table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  min-width:720px;
+}
+
+/* ================= TABLE HEADER ================= */
+
+.table thead{
+  background:#f8fafc;
+}
+
+.table th{
+  text-align:left;
+  padding:14px;
+  font-size:12px;
+  color:#475569;
+  border-bottom:1px solid rgba(15,23,42,.08);
+  font-weight:800;
+  letter-spacing:.02em;
+}
+
+/* ================= TABLE BODY ================= */
+
+.table td{
+  padding:14px;
+  border-bottom:1px solid rgba(15,23,42,.06);
+  font-size:14px;
+  font-weight:500;
+  color:#0f172a;
+  vertical-align:middle;
+}
+
+.table tbody tr:hover{
+  background:#fafcff;
+}
+
+/* ================= ACTIONS ================= */
+
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:nowrap;
+  align-items:center;
+}
+.actions button{
+  white-space:nowrap;
+  min-width:88px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.actionsCell{
+  min-width:220px;
+}
+/* ================= EMAIL ================= */
+
+.emailCell{
+  max-width:260px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+/* ================= ROLE PILL ================= */
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.2px;
+}
+
+.pillDriver{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+.pillAdmin{
+  background:#dbeafe;
+  color:#1d4ed8;
+}
+
+/* ================= EMPTY ================= */
+
+.empty{
+  text-align:center;
+  padding:24px;
+  color:#64748b;
+}
+
+/* ================= MUTED ================= */
+
+.muted{
+  color:#64748b;
+}
+
+/* ===================================================== */
+/* ================= RESPONSIVE ======================== */
+/* ===================================================== */
+
+@media (max-width:1000px){
+  .form{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .search{
+    width:200px;
+  }
+}
+
+@media (max-width:720px){
+  .top{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .tools{
+    width:100%;
+    justify-content:space-between;
+  }
+
+  .title{
+    font-size:22px;
+  }
+
+  .search{
+    width:100%;
+  }
+
+  .form{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .table{
+    min-width:620px;
+  }
+
+  .tableToolbar{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .actions{
+    flex-direction:row;
+    align-items:center;
+    flex-wrap:nowrap;
+  }
+
+  .actions button{
+    min-width:78px;
+  }
+}
+
+@media (max-width:520px){
+  .form{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  .input{
+    height:42px;
+    font-size:13px;
+    padding:10px 12px;
+  }
+
+  .roleButton{
+    height:42px;
+    padding:0 12px;
+  }
+
+  .btn,
+  .btnGhost,
+  .btnDanger{
+    font-size:13px;
+  }
+
+  .btn{
+    height:42px;
+    padding:8px 12px;
+  }
+
+  .btnGhost,
+  .btnDanger{
+    height:36px;
+    padding:6px 12px;
+  }
+}
+
+@media (max-width:420px){
+  .card{
+    padding:16px;
+    border-radius:18px;
+  }
+
+  .title{
+    font-size:19px;
+  }
+
+  .badge{
+    font-size:12px;
+  }
+}
+:global(body[data-theme="dark"]) .card,
+:global(body[data-theme="dark"]) .roleButton,
+:global(body[data-theme="dark"]) .roleMenu,
+:global(body[data-theme="dark"]) .input,
+:global(body[data-theme="dark"]) .btnGhost,
+:global(body[data-theme="dark"]) .table th,
+:global(body[data-theme="dark"]) .table td,
+:global(body[data-theme="dark"]) .badge{
+  background:var(--panel);
+  border-color:var(--line) !important;
+}
+
+:global(body[data-theme="dark"]) .title,
+:global(body[data-theme="dark"]) .roleText,
+:global(body[data-theme="dark"]) .roleOptionLabel,
+:global(body[data-theme="dark"]) .table td,
+:global(body[data-theme="dark"]) .input,
+:global(body[data-theme="dark"]) .btnGhost,
+:global(body[data-theme="dark"]) .actions button{
+  color:var(--text);
+}
+
+:global(body[data-theme="dark"]) .badge,
+:global(body[data-theme="dark"]) .roleCheck{
+  color:#93c5fd;
+}
+
+:global(body[data-theme="dark"]) .sub,
+:global(body[data-theme="dark"]) .tableMeta{
+  color:var(--muted);
+}
+
+:global(body[data-theme="dark"]) .input::placeholder,
+:global(body[data-theme="dark"]) .roleOptionDesc,
+:global(body[data-theme="dark"]) .chevron,
+:global(body[data-theme="dark"]) .emailCell,
+:global(body[data-theme="dark"]) .muted,
+:global(body[data-theme="dark"]) .empty{
+  color:var(--muted);
+}
+
+:global(body[data-theme="dark"]) .roleButton:hover,
+:global(body[data-theme="dark"]) .roleOption:hover,
+:global(body[data-theme="dark"]) .table tbody tr:hover,
+:global(body[data-theme="dark"]) .btnGhost:hover{
+  background:rgba(255,255,255,.05);
+}
+
+:global(body[data-theme="dark"]) .roleOptionActive{
+  background:rgba(37,99,235,.16);
+}

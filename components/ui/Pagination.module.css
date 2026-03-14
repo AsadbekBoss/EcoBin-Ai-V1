@@ -1,0 +1,120 @@
+.wrap{
+  margin-top:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.pages{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.pageBtn,
+.navBtn,
+.dots{
+  min-width:40px;
+  height:40px;
+  padding:0 12px;
+  border-radius:10px;
+  border:1px solid rgba(15,23,42,.08);
+  background:rgba(15,23,42,.04);
+  color:#5b6b82;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:15px;
+  font-weight:700;
+  line-height:1;
+  transition:transform .16s ease, background .16s ease, border-color .16s ease, opacity .16s ease, color .16s ease;
+}
+
+.navBtn{
+  font-size:24px;
+  font-weight:600;
+}
+
+.pageBtn:hover,
+.navBtn:hover{
+  transform:translateY(-1px);
+  background:rgba(37,99,235,.10);
+  border-color:rgba(37,99,235,.16);
+  color:#1d4ed8;
+}
+
+.pageBtnActive{
+  background:linear-gradient(180deg, rgba(59,130,246,.14), rgba(37,99,235,.18));
+  border-color:rgba(59,130,246,.24);
+  color:#1d4ed8;
+  box-shadow:0 8px 18px rgba(37,99,235,.12);
+}
+
+.navBtn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.dots{
+  font-size:14px;
+  color:#7f8ca2;
+  cursor:default;
+}
+
+:global(body[data-theme="dark"]) .pageBtn,
+:global(body[data-theme="dark"]) .navBtn,
+:global(body[data-theme="dark"]) .dots{
+  background:rgba(255,255,255,.04);
+  border-color:rgba(255,255,255,.08);
+  color:#9fb0c9;
+}
+
+:global(body[data-theme="dark"]) .pageBtn:hover,
+:global(body[data-theme="dark"]) .navBtn:hover{
+  background:rgba(59,130,246,.14);
+  border-color:rgba(96,165,250,.18);
+  color:#dbeafe;
+}
+
+:global(body[data-theme="dark"]) .pageBtnActive{
+  background:linear-gradient(180deg, rgba(59,130,246,.20), rgba(37,99,235,.22));
+  border-color:rgba(96,165,250,.28);
+  color:#e7f0ff;
+}
+
+:global(body[data-theme="dark"]) .dots{
+  color:#8ea2c4;
+}
+
+@media (max-width:640px){
+  .wrap{
+    gap:8px;
+  }
+
+  .pages{
+    gap:6px;
+  }
+
+  .pageBtn,
+  .navBtn,
+  .dots{
+    min-width:36px;
+    height:36px;
+    padding:0 10px;
+    border-radius:9px;
+  }
+
+  .pageBtn,
+  .dots{
+    font-size:14px;
+  }
+
+  .navBtn{
+    font-size:20px;
+  }
+}

@@ -1,0 +1,811 @@
+.wrap{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  position:relative;
+  z-index:1;
+}
+
+.headRow{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.hTitle{
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-.02em;
+  color:#0f172a;
+}
+
+.hSub{
+  margin-top:4px;
+  color:#64748b;
+  font-size:13px;
+  font-weight:500;
+}
+
+.headActions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.searchTop{
+  width:min(340px, 100%);
+}
+
+.btnPrimary{
+  border:0;
+  padding:10px 14px;
+  border-radius:12px;
+  font-weight:700;
+  cursor:pointer;
+  color:#fff;
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  box-shadow:0 10px 22px rgba(37,99,235,.22);
+  transition:transform .16s ease, box-shadow .16s ease, opacity .16s ease;
+}
+
+.btnPrimary:hover{
+  transform:translateY(-1px);
+}
+
+.btnPrimary:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+  box-shadow:none;
+  transform:none;
+}
+
+.btnGhost{
+  padding:10px 14px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:700;
+  border:1px solid rgba(2,6,23,.10);
+  background:#fff;
+  color:#0f172a;
+  transition:transform .16s ease, background .16s ease;
+}
+
+.btnGhost:hover{
+  background:#f8fafc;
+  transform:translateY(-1px);
+}
+
+.iconBtn{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  border:1px solid rgba(2,6,23,.10);
+  background:#fff;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  transition:transform .16s ease, background .16s ease;
+  flex:0 0 auto;
+}
+
+.iconBtn:hover{
+  background:#f8fafc;
+  transform:translateY(-1px);
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  justify-content:flex-end;
+  white-space:nowrap;
+}
+
+.btnSmall{
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid rgba(2,6,23,.10);
+  background:#fff;
+  cursor:pointer;
+  font-weight:700;
+  font-size:13px;
+  transition:background .16s ease, transform .16s ease;
+}
+
+.btnSmall:hover{
+  background:#f8fafc;
+  transform:translateY(-1px);
+}
+
+.btnDanger{
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid rgba(239,68,68,.35);
+  background:rgba(239,68,68,.08);
+  cursor:pointer;
+  font-weight:800;
+  font-size:13px;
+  color:#b91c1c;
+  transition:background .16s ease, border-color .16s ease, transform .16s ease;
+}
+
+.btnDanger:hover{
+  background:rgba(239,68,68,.14);
+  border-color:rgba(239,68,68,.55);
+  transform:translateY(-1px);
+}
+
+.alertErr{
+  padding:12px 14px;
+  border-radius:14px;
+  background:rgba(239,68,68,.10);
+  border:1px solid rgba(239,68,68,.25);
+  color:#991b1b;
+  font-weight:700;
+}
+
+.alertOk{
+  padding:12px 14px;
+  border-radius:14px;
+  background:rgba(34,197,94,.12);
+  border:1px solid rgba(34,197,94,.25);
+  color:#166534;
+  font-weight:800;
+}
+
+.cardsRow{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+
+.cardMini{
+  background:#fff;
+  border:1px solid rgba(2,6,23,.08);
+  border-radius:18px;
+  padding:14px;
+  box-shadow:0 10px 28px rgba(2,6,23,.06);
+}
+
+.cardMiniTop{
+  color:#64748b;
+  font-weight:700;
+  font-size:12px;
+}
+
+.cardMiniVal{
+  margin-top:6px;
+  font-size:22px;
+  font-weight:900;
+  color:#0f172a;
+}
+
+.card{
+  background:#fff;
+  border:1px solid rgba(2,6,23,.08);
+  border-radius:18px;
+  box-shadow:0 12px 34px rgba(2,6,23,.06);
+  overflow:hidden;
+  position:relative;
+  z-index:1;
+}
+
+.cardHead{
+  padding:14px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:12px;
+  border-bottom:1px solid rgba(2,6,23,.06);
+}
+
+.cardTitle{
+  font-size:17px;
+  font-weight:800;
+  color:#0f172a;
+}
+
+.cardHint{
+  color:#64748b;
+  font-size:12px;
+  font-weight:600;
+}
+
+.mono{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+
+.tableWrap{
+  overflow:auto;
+  position:relative;
+}
+
+.table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+}
+
+.table thead th{
+  position:sticky;
+  top:0;
+  background:#f8fafc;
+  color:#334155;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  padding:12px;
+  border-bottom:1px solid rgba(2,6,23,.08);
+  white-space:nowrap;
+  z-index:2;
+}
+
+.table tbody td{
+  padding:12px;
+  border-bottom:1px solid rgba(2,6,23,.06);
+  color:#0f172a;
+  font-size:14px;
+  font-weight:500;
+  vertical-align:top;
+  white-space:nowrap;
+}
+
+.table tbody tr:hover{
+  background:#f8fafc;
+}
+
+.tEmpty{
+  text-align:center;
+  padding:18px 12px;
+  color:#64748b;
+  font-weight:700;
+}
+
+.badgeRed,
+.badgeGreen{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:999px;
+  font-weight:900;
+  font-size:12px;
+}
+
+.badgeRed{
+  background:rgba(239,68,68,.12);
+  border:1px solid rgba(239,68,68,.28);
+  color:#b91c1c;
+}
+
+.badgeGreen{
+  background:rgba(34,197,94,.12);
+  border:1px solid rgba(34,197,94,.28);
+  color:#166534;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(2,6,23,.55);
+
+  display:flex;
+  align-items:flex-start;     /* markazdan chiqaramiz */
+  justify-content:center;
+
+  padding-top:140px;          /* TOPBAR dan masofa */
+  padding-left:24px;
+  padding-right:24px;
+  padding-bottom:40px;
+
+  z-index:99999;
+}
+
+.modal{
+  width: min(560px, 100%);
+  max-height: 70vh;        /* oldin juda baland edi */
+
+  background:#fff;
+  border-radius:20px;
+  box-shadow:0 24px 80px rgba(2,6,23,.35);
+
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+
+.modalHead{
+  padding:14px 16px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  border-bottom:1px solid rgba(2,6,23,.06);
+  background:#fff;
+  flex:0 0 auto;
+  position:relative;
+  z-index:2;
+}
+
+.modalTitle{
+  font-size:17px;
+  font-weight:900;
+  color:#0f172a;
+  line-height:1.2;
+}
+
+.modalSub{
+  margin-top:4px;
+  font-size:12px;
+  color:#64748b;
+  line-height:1.35;
+}
+
+.note{
+  margin:10px 14px 0;
+  padding:10px 12px;
+  border-radius:12px;
+  background:#f1f5f9;
+  border:1px solid rgba(2,6,23,.08);
+  color:#334155;
+  font-weight:700;
+  font-size:13px;
+  flex:0 0 auto;
+}
+
+.modalBody{
+  flex:1 1 auto;
+  overflow-y:auto;
+  overflow-x:hidden;
+  min-height:0;
+}
+
+.grid{
+  padding:12px 14px 10px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  align-items:start;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  min-width:0;
+}
+
+.fieldFull{
+  grid-column:1 / -1;
+}
+
+.label{
+  font-size:12px;
+  font-weight:700;
+  color:#334155;
+}
+
+.input{
+  height:42px;
+  border-radius:12px;
+  border:1px solid rgba(2,6,23,.12);
+  padding:0 12px;
+  outline:none;
+  background:#fff;
+  color:#0f172a;
+  font-size:14px;
+  font-weight:500;
+  transition:border-color .16s ease, box-shadow .16s ease, background .16s ease;
+  width:100%;
+  min-width:0;
+}
+
+.input:focus{
+  border-color:rgba(37,99,235,.55);
+  box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+.input:disabled{
+  background:#f8fafc;
+  color:#475569;
+  cursor:not-allowed;
+}
+
+.hint{
+  margin-top:4px;
+  font-size:12px;
+  color:#64748b;
+  font-weight:700;
+  line-height:1.35;
+}
+
+.modalActions{
+  padding:12px 14px 14px;
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  border-top:1px solid rgba(2,6,23,.06);
+  flex:0 0 auto;
+  background:#fff;
+  position:relative;
+  z-index:2;
+}
+
+.driverPicker{
+  max-height:160px;   /* oldin 240 edi */
+  overflow:auto;
+}
+
+.driverItem{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:9px 10px;
+  border-radius:10px;
+  border:1px solid rgba(2,6,23,.06);
+  background:#f8fafc;
+  cursor:pointer;
+  font-size:14px;
+  line-height:1.4;
+  transition:background .16s ease, border-color .16s ease;
+}
+
+.driverItem:hover{
+  background:#eff6ff;
+  border-color:rgba(37,99,235,.18);
+}
+
+.driverItem input{
+  flex:0 0 auto;
+  margin-top:2px;
+}
+
+.emptyDriverBox{
+  padding:12px;
+  border-radius:12px;
+  color:#64748b;
+  font-weight:700;
+  background:#f8fafc;
+}
+
+.driverBadges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.driverBadge{
+  display:inline-flex;
+  align-items:center;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  color:#1e3a8a;
+  background:#dbeafe;
+  border:1px solid #bfdbfe;
+}
+
+.textRed{
+  color:#b91c1c;
+  font-weight:900;
+}
+
+.textGreen{
+  color:#166534;
+  font-weight:900;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .cardsRow{
+    grid-template-columns:1fr;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px){
+  .headRow{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .searchTop{
+    width:100%;
+  }
+
+  .actions{
+    justify-content:flex-start;
+    flex-wrap:wrap;
+  }
+
+  .backdrop{
+    align-items:flex-end;
+    padding:0;
+  }
+
+  .modal{
+    width:100%;
+    max-width:none;
+    max-height:88dvh;
+    border-radius:22px 22px 0 0;
+    margin:0;
+    box-shadow:0 -18px 48px rgba(2,6,23,.22);
+    animation:trashbinModalUp .22s ease;
+  }
+
+  .modalHead{
+    padding:14px 16px;
+    gap:10px;
+  }
+
+  .modalHead::before{
+    content:"";
+    position:absolute;
+    top:8px;
+    left:50%;
+    transform:translateX(-50%);
+    width:42px;
+    height:5px;
+    border-radius:999px;
+    background:rgba(100,116,139,.28);
+  }
+
+  .modalTitle{
+    font-size:17px;
+  }
+
+  .modalSub{
+    margin-top:3px;
+    font-size:11px;
+    line-height:1.35;
+  }
+
+  .iconBtn{
+    width:36px;
+    height:36px;
+    border-radius:12px;
+  }
+
+  .note{
+    margin:10px 12px 0;
+    padding:10px 12px;
+    border-radius:12px;
+    font-size:12px;
+  }
+
+  .grid{
+    padding:12px 12px 8px;
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  .field{
+    gap:5px;
+  }
+
+  .label{
+    font-size:11px;
+  }
+
+  .input{
+    height:46px;
+    border-radius:14px;
+    padding:0 14px;
+    font-size:15px;
+    background:#f8fafc;
+  }
+
+  .hint{
+    margin-top:4px;
+    font-size:11px;
+    line-height:1.35;
+  }
+
+  .driverPicker{
+    max-height:220px;
+    min-height:120px;
+    padding:8px;
+    border-radius:14px;
+    background:#f8fafc;
+  }
+
+  .driverItem{
+    gap:10px;
+    padding:10px 12px;
+    border-radius:12px;
+    font-size:13px;
+    line-height:1.35;
+  }
+
+  .driverItem input{
+    width:16px;
+    height:16px;
+    margin-top:2px;
+  }
+
+  .emptyDriverBox{
+    padding:12px;
+    border-radius:12px;
+    font-size:13px;
+  }
+
+  .modalActions{
+    position:sticky;
+    bottom:0;
+    background:#fff;
+    padding:12px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .modalActions .btnGhost,
+  .modalActions .btnPrimary{
+    min-height:44px;
+    width:100%;
+    border-radius:14px;
+    font-size:15px;
+    font-weight:800;
+    padding:0 14px;
+  }
+}
+
+@media (max-width: 420px){
+  .modal{
+    max-height:92dvh;
+    border-radius:18px 18px 0 0;
+  }
+
+  .modalHead{
+    padding:12px 12px;
+  }
+
+  .modalTitle{
+    font-size:16px;
+  }
+
+  .modalSub{
+    font-size:11px;
+  }
+
+  .grid{
+    padding:10px 10px 8px;
+    gap:9px;
+  }
+
+  .input{
+    height:44px;
+    font-size:14px;
+  }
+
+  .driverPicker{
+    max-height:190px;
+  }
+
+  .driverItem{
+    padding:9px 10px;
+    font-size:12px;
+  }
+
+  .modalActions{
+    padding:10px;
+    gap:8px;
+  }
+
+  .modalActions .btnGhost,
+  .modalActions .btnPrimary{
+    min-height:42px;
+    font-size:14px;
+  }
+}
+
+@keyframes trashbinModalUp{
+  from{
+    transform:translateY(18px);
+    opacity:.86;
+  }
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+@keyframes trashbinModalFade{
+  from{
+    transform:translateY(10px) scale(.98);
+    opacity:.92;
+  }
+  to{
+    transform:translateY(0) scale(1);
+    opacity:1;
+  }
+}
+:global(body[data-theme="dark"]) .hTitle,
+:global(body[data-theme="dark"]) .cardTitle,
+:global(body[data-theme="dark"]) .cardMiniVal,
+:global(body[data-theme="dark"]) .modalTitle,
+:global(body[data-theme="dark"]) .table tbody td,
+:global(body[data-theme="dark"]) .input,
+:global(body[data-theme="dark"]) .label,
+:global(body[data-theme="dark"]) .driverItem,
+:global(body[data-theme="dark"]) .btnGhost,
+:global(body[data-theme="dark"]) .btnSmall,
+:global(body[data-theme="dark"]) .iconBtn{
+  color:var(--text);
+}
+
+:global(body[data-theme="dark"]) .hSub,
+:global(body[data-theme="dark"]) .cardHint,
+:global(body[data-theme="dark"]) .cardMiniTop,
+:global(body[data-theme="dark"]) .modalSub,
+:global(body[data-theme="dark"]) .hint,
+:global(body[data-theme="dark"]) .tEmpty,
+:global(body[data-theme="dark"]) .note,
+:global(body[data-theme="dark"]) .emptyDriverBox{
+  color:var(--muted);
+}
+
+:global(body[data-theme="dark"]) .btnGhost,
+:global(body[data-theme="dark"]) .iconBtn,
+:global(body[data-theme="dark"]) .btnSmall,
+:global(body[data-theme="dark"]) .cardMini,
+:global(body[data-theme="dark"]) .card,
+:global(body[data-theme="dark"]) .modal,
+:global(body[data-theme="dark"]) .modalHead,
+:global(body[data-theme="dark"]) .modalActions,
+:global(body[data-theme="dark"]) .note,
+:global(body[data-theme="dark"]) .input,
+:global(body[data-theme="dark"]) .driverItem,
+:global(body[data-theme="dark"]) .emptyDriverBox,
+:global(body[data-theme="dark"]) .driverPicker,
+:global(body[data-theme="dark"]) .table thead th{
+  background:var(--panel);
+  border-color:var(--line);
+}
+
+:global(body[data-theme="dark"]) .btnGhost:hover,
+:global(body[data-theme="dark"]) .iconBtn:hover,
+:global(body[data-theme="dark"]) .btnSmall:hover,
+:global(body[data-theme="dark"]) .driverItem:hover,
+:global(body[data-theme="dark"]) .table tbody tr:hover{
+  background:rgba(255,255,255,.05);
+}
+
+:global(body[data-theme="dark"]) .table thead th{
+  background:var(--panel-2);
+}
+
+:global(body[data-theme="dark"]) .table tbody td,
+:global(body[data-theme="dark"]) .cardHead,
+:global(body[data-theme="dark"]) .modalHead,
+:global(body[data-theme="dark"]) .modalActions{
+  border-color:var(--line);
+}
+
+:global(body[data-theme="dark"]) .input:disabled{
+  background:rgba(255,255,255,.05);
+  color:var(--muted);
+}
+
+:global(body[data-theme="dark"]) .driverBadge{
+  background:rgba(37,99,235,.18);
+  border-color:rgba(147,197,253,.22);
+  color:#bfdbfe;
+}
