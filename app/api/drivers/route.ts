@@ -17,13 +17,16 @@ export async function GET(req: Request) {
     }
 
     const base = getBase();
+
     const url = new URL(req.url);
     const page = url.searchParams.get("page") ?? "0";
     const size = url.searchParams.get("size") ?? "1000";
 
     const upstream = await fetch(`${base}/api/users?page=${page}&size=${size}`, {
       method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       cache: "no-store",
     });
 
@@ -40,7 +43,10 @@ export async function GET(req: Request) {
     });
   } catch (e: any) {
     return NextResponse.json(
-      { ok: false, message: e?.message || "drivers GET proxy error" },
+      {
+        ok: false,
+        message: e?.message || "drivers GET proxy error",
+      },
       { status: 500 }
     );
   }
@@ -80,7 +86,10 @@ export async function POST(req: Request) {
     });
   } catch (e: any) {
     return NextResponse.json(
-      { ok: false, message: e?.message || "drivers POST proxy error" },
+      {
+        ok: false,
+        message: e?.message || "drivers POST proxy error",
+      },
       { status: 500 }
     );
   }
