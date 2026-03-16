@@ -22,7 +22,10 @@ function pickList(data: any): UserRow[] {
 
 const ROLE_OPTIONS: Role[] = ["DRIVER", "ADMIN"];
 
-const ROLE_META: Record<Role, { label: string; desc: string; dotClass: string }> = {
+const ROLE_META: Record<
+  Role,
+  { label: string; desc: string; dotClass: string }
+> = {
   DRIVER: {
     label: "DRIVER",
     desc: "Haydovchi roli",
@@ -83,7 +86,7 @@ export default function DriversPanel() {
     setErr("");
 
     try {
-      const res = await apiFetch("/api/drivers?page=0&size=1000", {
+      const res = await apiFetch("/api/users/drivers?page=0&size=1000", {
         cache: "no-store",
       });
 
@@ -117,7 +120,7 @@ export default function DriversPanel() {
       [x.fullname, x.username, x.email ?? "", x.role]
         .join(" ")
         .toLowerCase()
-        .includes(t)
+        .includes(t),
     );
   }, [rows, q]);
 
@@ -144,7 +147,7 @@ export default function DriversPanel() {
     setErr("");
 
     try {
-      const res = await apiFetch("/api/drivers", {
+      const res = await apiFetch("/api/users/drivers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -250,11 +253,16 @@ export default function DriversPanel() {
         <div className={Style.top}>
           <div className={Style.titleWrap}>
             <h2 className={Style.title}>Foydalanuvchilar</h2>
-            <p className={Style.sub}>ADMIN va DRIVER ro‘yxati, qidiruv va boshqaruv</p>
+            <p className={Style.sub}>
+              ADMIN va DRIVER ro‘yxati, qidiruv va boshqaruv
+            </p>
           </div>
 
           <div className={Style.tools}>
-            <span className={Style.badge}>{filtered.length} ta foydalanuvchi • {currentPage}/{totalPages} sahifa</span>
+            <span className={Style.badge}>
+              {filtered.length} ta foydalanuvchi • {currentPage}/{totalPages}{" "}
+              sahifa
+            </span>
 
             <input
               className={`${Style.input} ${Style.search}`}
@@ -316,10 +324,14 @@ export default function DriversPanel() {
                   <span
                     className={`${Style.roleDot} ${ROLE_META[form.role].dotClass}`}
                   />
-                  <span className={Style.roleText}>{ROLE_META[form.role].label}</span>
+                  <span className={Style.roleText}>
+                    {ROLE_META[form.role].label}
+                  </span>
                 </span>
 
-                <span className={`${Style.chevron} ${roleOpen ? Style.chevronOpen : ""}`}>
+                <span
+                  className={`${Style.chevron} ${roleOpen ? Style.chevronOpen : ""}`}
+                >
                   ▾
                 </span>
               </button>
@@ -370,7 +382,10 @@ export default function DriversPanel() {
 
       <div className={`${Style.card} ${Style.tableWrap}`}>
         <div className={Style.tableToolbar}>
-          <div className={Style.tableMeta}>Ro‘yxat natijasi: {filtered.length} ta • Sahifa {currentPage}/{totalPages}</div>
+          <div className={Style.tableMeta}>
+            Ro‘yxat natijasi: {filtered.length} ta • Sahifa {currentPage}/
+            {totalPages}
+          </div>
         </div>
 
         <table className={Style.table}>
@@ -433,42 +448,42 @@ export default function DriversPanel() {
                     <span className={pillClass(x.role)}>{x.role}</span>
                   </td>
 
-                 <td className={Style.actionsCell}>
-  <div className={Style.actions}>
-    {canEdit && !isEdit && (
-      <button
-        className={Style.btnGhost}
-        onClick={() => setEditing(x)}
-      >
-        Edit
-      </button>
-    )}
+                  <td className={Style.actionsCell}>
+                    <div className={Style.actions}>
+                      {canEdit && !isEdit && (
+                        <button
+                          className={Style.btnGhost}
+                          onClick={() => setEditing(x)}
+                        >
+                          Edit
+                        </button>
+                      )}
 
-    {canEdit && isEdit && (
-      <>
-        <button className={Style.btn} onClick={saveEdit}>
-          Save
-        </button>
+                      {canEdit && isEdit && (
+                        <>
+                          <button className={Style.btn} onClick={saveEdit}>
+                            Save
+                          </button>
 
-        <button
-          className={Style.btnGhost}
-          onClick={() => setEditing(null)}
-        >
-          Cancel
-        </button>
-      </>
-    )}
+                          <button
+                            className={Style.btnGhost}
+                            onClick={() => setEditing(null)}
+                          >
+                            Cancel
+                          </button>
+                        </>
+                      )}
 
-    {canDelete && (
-      <button
-        className={Style.btnDanger}
-        onClick={() => deleteRow(x.id)}
-      >
-        Delete
-      </button>
-    )}
-  </div>
-</td>
+                      {canDelete && (
+                        <button
+                          className={Style.btnDanger}
+                          onClick={() => deleteRow(x.id)}
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </div>
+                  </td>
                 </tr>
               );
             })}
