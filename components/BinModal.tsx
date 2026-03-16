@@ -85,14 +85,7 @@ export default function BinModal() {
                 Haritada ko‘rsat
               </button>
 
-              <button
-                className="btn binBtn danger"
-                id="cleanBtn"
-                type="button"
-                style={{ display: "none" }}
-              >
-                Tozalash
-              </button>
+          
             </div>
           </div>
         </div>
