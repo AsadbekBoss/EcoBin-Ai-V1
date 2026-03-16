@@ -3,7 +3,9 @@ import { authExpiredJson, isAuthStatus } from "@/lib/server/monitorAuth";
 import { getBearerToken } from "@/lib/auth-token";
 
 function getBase() {
-  return process.env.API_BASE || process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8082";
+  const base = process.env.API_BASE || process.env.NEXT_PUBLIC_API_BASE;
+  if (!base) throw new Error("API_BASE topilmadi");
+  return base;
 }
 
 type Ctx = { params: Promise<{ id: string }> };
@@ -16,7 +18,10 @@ export async function PUT(req: Request, ctx: Ctx) {
     const token = getBearerToken(req);
 
     if (!token) {
-      return authExpiredJson({ ok: false, message: "Token yo‘q. Login qiling." }, 401);
+      return authExpiredJson(
+        { ok: false, message: "Token yo‘q. Login qiling." },
+        401,
+      );
     }
 
     const body = await req.json();
@@ -42,7 +47,7 @@ export async function PUT(req: Request, ctx: Ctx) {
     if (isAuthStatus(upstream.status)) {
       return authExpiredJson(
         { ok: false, message: data?.message || "Sessiya tugagan", debug: data },
-        upstream.status
+        upstream.status,
       );
     }
 
@@ -50,7 +55,7 @@ export async function PUT(req: Request, ctx: Ctx) {
   } catch (e: any) {
     return NextResponse.json(
       { ok: false, message: e?.message || "Server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -63,7 +68,10 @@ export async function DELETE(req: Request, ctx: Ctx) {
     const token = getBearerToken(req);
 
     if (!token) {
-      return authExpiredJson({ ok: false, message: "Token yo‘q. Login qiling." }, 401);
+      return authExpiredJson(
+        { ok: false, message: "Token yo‘q. Login qiling." },
+        401,
+      );
     }
 
     const upstream = await fetch(`${base}/api/trashbins/${id}`, {
@@ -84,14 +92,22 @@ export async function DELETE(req: Request, ctx: Ctx) {
         }
 
         return authExpiredJson(
-          { ok: false, message: data?.message || "Sessiya tugagan", debug: data },
-          upstream.status
+          {
+            ok: false,
+            message: data?.message || "Sessiya tugagan",
+            debug: data,
+          },
+          upstream.status,
         );
       }
 
       return NextResponse.json(
-        { ok: false, message: `Backend status: ${upstream.status}`, debug: text },
-        { status: upstream.status }
+        {
+          ok: false,
+          message: `Backend status: ${upstream.status}`,
+          debug: text,
+        },
+        { status: upstream.status },
       );
     }
 
@@ -99,7 +115,7 @@ export async function DELETE(req: Request, ctx: Ctx) {
   } catch (e: any) {
     return NextResponse.json(
       { ok: false, message: e?.message || "Server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

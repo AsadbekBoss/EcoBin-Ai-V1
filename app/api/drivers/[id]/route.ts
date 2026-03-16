@@ -1,8 +1,16 @@
 import { NextResponse } from "next/server";
-import { authExpiredJson, authExpiredText, isAuthStatus } from "@/lib/server/monitorAuth";
+import {
+  authExpiredJson,
+  authExpiredText,
+  isAuthStatus,
+} from "@/lib/server/monitorAuth";
 import { getBearerToken } from "@/lib/auth-token";
 
-const base = process.env.API_BASE || process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8082";
+function getBase() {
+  const base = process.env.API_BASE || process.env.NEXT_PUBLIC_API_BASE;
+  if (!base) throw new Error("API_BASE topilmadi");
+  return base;
+}
 
 function json(status: number, payload: any) {
   return NextResponse.json(payload, { status });
@@ -31,7 +39,10 @@ export async function PUT(req: Request, ctx: Ctx) {
 
   const token = getToken(req);
   if (!token) {
-    return authExpiredJson({ message: "Token topilmadi (monitor_token). Qayta login qiling." }, 401);
+    return authExpiredJson(
+      { message: "Token topilmadi (monitor_token). Qayta login qiling." },
+      401,
+    );
   }
 
   const body = await req.text().catch(() => "");
@@ -39,6 +50,8 @@ export async function PUT(req: Request, ctx: Ctx) {
 
   let upstream: Response;
   try {
+    const base = getBase();
+
     upstream = await fetch(`${base}/api/users/${id}`, {
       method: "PUT",
       headers: {
@@ -74,11 +87,16 @@ export async function DELETE(req: Request, ctx: Ctx) {
 
   const token = getToken(req);
   if (!token) {
-    return authExpiredJson({ message: "Token topilmadi (monitor_token). Qayta login qiling." }, 401);
+    return authExpiredJson(
+      { message: "Token topilmadi (monitor_token). Qayta login qiling." },
+      401,
+    );
   }
 
   let upstream: Response;
   try {
+    const base = getBase();
+
     upstream = await fetch(`${base}/api/users/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },

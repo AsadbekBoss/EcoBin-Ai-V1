@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+
 async function fetchJsonSafe(r: Response) {
   const text = await r.text();
   try {
@@ -7,53 +8,62 @@ async function fetchJsonSafe(r: Response) {
     return { raw: text };
   }
 }
+
 async function wialonCall(base: string, sid: string, svc: string, params: any) {
   const body = new URLSearchParams();
   body.set("sid", sid);
   body.set("params", JSON.stringify(params));
 
-  const url = base + "/wialon/ajax.html?svc=" + svc;
+  const url = `${base}/wialon/ajax.html?svc=${svc}`;
 
   const r = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body,
+    cache: "no-store",
   });
 
-    return fetchJsonSafe(r);
+  return fetchJsonSafe(r);
 }
 
 async function loginToken(base: string, token: string) {
   const body = new URLSearchParams();
   body.set("params", JSON.stringify({ token }));
 
-  const url = base + "/wialon/ajax.html?svc=token/login";
+  const url = `${base}/wialon/ajax.html?svc=token/login`;
 
   const r = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body,
+    cache: "no-store",
   });
 
-    return fetchJsonSafe(r);
+  return fetchJsonSafe(r);
 }
 
 export async function GET() {
   try {
-    const base = process.env.SMARTGPS_BASE!;
-    const token = process.env.SMARTGPS_TOKEN!;
+    const base = process.env.SMARTGPS_BASE;
+    const token = process.env.SMARTGPS_TOKEN;
 
-    // 1) LOGIN
+    if (!base || !token) {
+      return NextResponse.json(
+        { ok: false, error: "ENV yo‘q: SMARTGPS_BASE yoki SMARTGPS_TOKEN" },
+        { status: 500 }
+      );
+    }
+
     const loginData = await loginToken(base, token);
-  const sid = loginData?.eid || loginData?.sid;
+    const sid = loginData?.eid || loginData?.sid;
 
-if (loginData?.error || !sid) {
-  return NextResponse.json(
-    { ok: false, error: "SmartGPS login failed", loginData },
-    { status: 401 }
-  );
-}
-    // 2) UNITS OLISH
+    if (loginData?.error || !sid) {
+      return NextResponse.json(
+        { ok: false, error: "SmartGPS login failed", loginData },
+        { status: 401 }
+      );
+    }
+
     const params = {
       spec: {
         itemsType: "avl_unit",
@@ -62,31 +72,28 @@ if (loginData?.error || !sid) {
         sortType: "sys_name",
       },
       force: 1,
-      flags: 1025, // hozircha tegmaymiz
+      flags: 1025,
       from: 0,
       to: 0,
     };
 
     const unitsData = await wialonCall(base, sid, "core/search_items", params);
 
-    // 3) MAPGA KERAK FORMAT
-    const items = Array.isArray(unitsData?.items) ? unitsData.items : [];
     if (unitsData?.error) {
-  return NextResponse.json(
-    { ok: false, error: "SmartGPS units error", unitsData },
-    { status: 502 }
-  );
-}
+      return NextResponse.json(
+        { ok: false, error: "SmartGPS units error", unitsData },
+        { status: 502 }
+      );
+    }
+
+    const items = Array.isArray(unitsData?.items) ? unitsData.items : [];
 
     const cars = items
       .map((u: any) => {
         const p = u?.pos || u?.lmsg?.pos;
         if (!p) return null;
 
-        // ✅ time (seconds)
         const time = u?.lmsg?.t ?? null;
-
-        // ✅ mileage (fallback bilan)
         const mileage =
           u?.mileage ??
           u?.lmsg?.mileage ??
@@ -104,18 +111,12 @@ if (loginData?.error || !sid) {
           mileage: mileage == null ? null : Number(mileage),
         };
       })
-      .filter(
-        (c: any) =>
-          c &&
-          Number.isFinite(c.id) &&
-          Number.isFinite(c.lat) &&
-          Number.isFinite(c.lng)
-      );
+      .filter((c: any) => c && Number.isFinite(c.id) && Number.isFinite(c.lat) && Number.isFinite(c.lng));
 
-    return NextResponse.json({ cars });
-  } catch (e) {
+    return NextResponse.json({ ok: true, cars });
+  } catch (e: any) {
     return NextResponse.json(
-      { error: "server error", message: String(e) },
+      { ok: false, error: "server error", message: String(e?.message || e) },
       { status: 500 }
     );
   }

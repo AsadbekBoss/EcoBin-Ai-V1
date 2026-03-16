@@ -3,7 +3,9 @@ import { authExpiredJson, isAuthStatus } from "@/lib/server/monitorAuth";
 import { getBearerToken } from "@/lib/auth-token";
 
 function getBase() {
-  return process.env.API_BASE || process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8082";
+  const base = process.env.API_BASE || process.env.NEXT_PUBLIC_API_BASE;
+  if (!base) throw new Error("API_BASE topilmadi");
+  return base;
 }
 
 export async function GET(req: Request) {
@@ -12,18 +14,24 @@ export async function GET(req: Request) {
     const token = getBearerToken(req);
 
     if (!token) {
-      return authExpiredJson({ ok: false, message: "Token yo‘q. Login qiling." }, 401);
+      return authExpiredJson(
+        { ok: false, message: "Token yo‘q. Login qiling." },
+        401,
+      );
     }
 
     const url = new URL(req.url);
     const page = url.searchParams.get("page") ?? "0";
     const size = url.searchParams.get("size") ?? "1000";
 
-    const upstream = await fetch(`${base}/api/trashbins?page=${page}&size=${size}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-      cache: "no-store",
-    });
+    const upstream = await fetch(
+      `${base}/api/trashbins?page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+        cache: "no-store",
+      },
+    );
 
     const text = await upstream.text();
     let data: any = null;
@@ -36,27 +44,41 @@ export async function GET(req: Request) {
     if (!upstream.ok) {
       if (isAuthStatus(upstream.status)) {
         return authExpiredJson(
-          { ok: false, message: data?.message || "Sessiya tugagan", debug: data },
-          upstream.status
+          {
+            ok: false,
+            message: data?.message || "Sessiya tugagan",
+            debug: data,
+          },
+          upstream.status,
         );
       }
 
       return NextResponse.json(
-        { ok: false, message: `Backend status: ${upstream.status}`, debug: data },
-        { status: upstream.status }
+        {
+          ok: false,
+          message: `Backend status: ${upstream.status}`,
+          debug: data,
+        },
+        { status: upstream.status },
       );
     }
 
-    const items =
-      Array.isArray(data) ? data :
-      Array.isArray(data?.content) ? data.content :
-      Array.isArray(data?.items) ? data.items :
-      Array.isArray(data?.data) ? data.data :
-      [];
+    const items = Array.isArray(data)
+      ? data
+      : Array.isArray(data?.content)
+        ? data.content
+        : Array.isArray(data?.items)
+          ? data.items
+          : Array.isArray(data?.data)
+            ? data.data
+            : [];
 
     return NextResponse.json({ ok: true, items });
   } catch (e: any) {
-    return NextResponse.json({ ok: false, message: e?.message || "Server error" }, { status: 500 });
+    return NextResponse.json(
+      { ok: false, message: e?.message || "Server error" },
+      { status: 500 },
+    );
   }
 }
 
@@ -66,14 +88,20 @@ export async function POST(req: Request) {
     const token = getBearerToken(req);
 
     if (!token) {
-      return authExpiredJson({ ok: false, message: "Token yo‘q. Login qiling." }, 401);
+      return authExpiredJson(
+        { ok: false, message: "Token yo‘q. Login qiling." },
+        401,
+      );
     }
 
     const body = await req.json();
 
     const upstream = await fetch(`${base}/api/trashbins`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify(body),
       cache: "no-store",
     });
@@ -89,12 +117,15 @@ export async function POST(req: Request) {
     if (isAuthStatus(upstream.status)) {
       return authExpiredJson(
         { ok: false, message: data?.message || "Sessiya tugagan", debug: data },
-        upstream.status
+        upstream.status,
       );
     }
 
     return NextResponse.json(data, { status: upstream.status });
   } catch (e: any) {
-    return NextResponse.json({ ok: false, message: e?.message || "Server error" }, { status: 500 });
+    return NextResponse.json(
+      { ok: false, message: e?.message || "Server error" },
+      { status: 500 },
+    );
   }
 }

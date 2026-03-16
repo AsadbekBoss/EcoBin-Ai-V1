@@ -2,10 +2,15 @@ import { NextResponse } from "next/server";
 import { authExpiredJson, isAuthStatus } from "@/lib/server/monitorAuth";
 import { getBearerToken } from "@/lib/auth-token";
 
+function getBase() {
+  const base = process.env.API_BASE || process.env.NEXT_PUBLIC_API_BASE;
+  if (!base) throw new Error("API_BASE topilmadi");
+  return base;
+}
+
 export async function GET(req: Request) {
   try {
-    const base = process.env.API_BASE || process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8082";
-
+    const base = getBase();
     const token = getBearerToken(req);
 
     if (!token) {
@@ -22,6 +27,7 @@ export async function GET(req: Request) {
 
     const text = await upstream.text();
     let data: any = null;
+
     try {
       data = text ? JSON.parse(text) : null;
     } catch {
